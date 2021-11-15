@@ -24,10 +24,29 @@ exports.up = async (knex) => {
         .onUpdate('RESTRICT')
       potlucks.timestamps(false, true)
     })
+    .createTable('potluck_users', (potluck_users) => {
+      potluck_users.increments('potluck_user_id')
+      potluck_users.integer('user_id', 200)
+        .notNullable()
+        .unsigned()
+        .references('user_id')
+        .inTable('users')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
+      potluck_users.integer('potluck_id', 200)
+        .notNullable()
+        .unsigned()
+        .references('potluck_id')
+        .inTable('potlucks')
+        .onDelete('RESTRICT')
+        .onUpdate('RESTRICT')
+      potluck_users.timestamps
+    })
 }
 
 exports.down = async (knex) => {
   await knex.schema
+    .dropTableIfExists('potluck_users')
     .dropTableIfExists('potlucks')
     .dropTableIfExists('users')
 }
