@@ -12,8 +12,9 @@ function get() {
 
 function getById(id) {
     return db('events')
-        .where({ id })
-        .first();
+      .select('event_id', 'organizer', 'event title', 'event_location', 'event_description')
+      .where('event_id', id)
+      .first()
 }
 //Still need to test 'insert'
 function insert(event){
