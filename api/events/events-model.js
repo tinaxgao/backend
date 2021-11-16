@@ -6,8 +6,6 @@ module.exports = {
     insert
 }
 
-
-
 function get() {
     return db('events');
 }
@@ -22,6 +20,6 @@ function insert(event){
     return db('events')
         .insert(event)
         .then(id => {
-            return findById(id[0]);
+            return getById(id[0]);
         })
 }
