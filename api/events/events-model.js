@@ -6,22 +6,21 @@ module.exports = {
     insert
 }
 
-
-
 function get() {
     return db('events');
 }
 
 function getById(id) {
     return db('events')
-        .where({ id })
-        .first();
+      .select('event_id', 'organizer', 'event title', 'event_location', 'event_description')
+      .where('event_id', id)
+      .first()
 }
 //Still need to test 'insert'
 function insert(event){
     return db('events')
         .insert(event)
         .then(id => {
-            return findById(id[0]);
+            return getById(id[0]);
         })
 }

@@ -1,4 +1,4 @@
-const Users = require('../users/users-model')
+const Users = require('./auth-model')
 
 const checkBody = (req, res, next) => {
   const {username, password} = req.body
