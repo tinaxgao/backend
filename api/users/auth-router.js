@@ -2,12 +2,12 @@ const router = require('express').Router()
 const bcrypt = require('bcryptjs')
 const jwt = require('jsonwebtoken')
 const {JWT_SECRET} = require('../secrets')
-const Users = require('./users-model')
+const Users = require('./auth-model')
 const {
   checkBody,
   checkUsernameFree,
   checkExistingUsername
-} = require('./users-middleware')
+} = require('./auth-middleware')
 
 router.get('/', (req, res, next) => {
   Users.find()
