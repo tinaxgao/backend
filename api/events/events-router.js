@@ -5,7 +5,7 @@ const Events = require('./events-model')
 router.get('/', (req, res, next) => {
 	Events.get()
 		.then((eventsArray) => {
-			res.status(200).json(eventsArray);
+			res.status(200).json(eventsArray)
 		})
 		.catch(next);
 });
