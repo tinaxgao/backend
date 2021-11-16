@@ -1,6 +1,6 @@
-const express = require('express');
-const router = express.Router();
-const Events = require('./events-model');
+const router = require('express').Router()
+const Events = require('./events-model')
+
 //GET ALL EVENTS
 router.get('/', (req, res, next) => {
 	Events.get()
@@ -21,10 +21,12 @@ router.get('/:id', (req, res, next) => {
 });
 //POST AN EVENT
 //NEEDS A VALIDATION MIDDLEWARE
-router.post('/', (req,req,next) => {
+router.post('/', (req, res, next) => {
     Events.insert(req.body)
         .then(event => {
             res.status(201).json({message: `New event: ${event} created.`})
         })
         .catch(next)
 })
+
+module.exports = router
