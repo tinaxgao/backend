@@ -20,7 +20,6 @@ router.get('/:id', (req, res, next) => {
 });
 
 //POST AN EVENT
-//NEEDS A VALIDATION MIDDLEWARE
 router.post('/', async (req, res, next) => {
     Events.insert(req.body)
         .then(event => {
