@@ -12,8 +12,7 @@ router.get('/', async (req, res, next) => {
 //GET EVENT AT 'ID'
 //NEEDS A VALIDATION MIDDLEWARE
 router.get('/:id', (req, res, next) => {
-	const id = req.params.id;
-	Events.getById(id)
+	Events.getById(req.params.id)
 		.then((event) => {
 			res.status(200).json(event);
 		})
