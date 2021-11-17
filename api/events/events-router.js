@@ -2,7 +2,7 @@ const router = require('express').Router()
 const Events = require('./events-model')
 
 //GET ALL EVENTS
-router.get('/', (req, res, next) => {
+router.get('/', async (req, res, next) => {
 	Events.get()
 		.then((eventsArray) => {
 			res.status(200).json(eventsArray)
