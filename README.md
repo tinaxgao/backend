@@ -22,4 +22,15 @@ POST
 
   -creates a new event
   
-	-needs event_title, event_location, event_description
+	-needs event_title, event_location, event_description, event_date
+
+
+Guest endpoints
+
+https://lambdapotluck.herokuapp.com/api/guests/
+
+GET
+-gets all guests
+
+POST
+-creates new guests
