@@ -3,7 +3,9 @@ const db = require('../data/db-config');
 module.exports = {
     get,
     getById,
-    insert
+    insert,
+    update,
+    remove
 }
 
 async function get() {
@@ -51,4 +53,22 @@ async function insert(newEvent){
     .returning(['event_id', 'organizer', 'event_title', 'event_location', 'event_description', 'event_date'])
     .insert(newEvent)
   return event
+}
+
+async function update(id, event){
+  const [updatedEvent] = await db('events')
+  .where({ id })
+  .update(event, [
+    'event_id', 
+    'organizer', 
+    'event_title', 
+    'event_location', 
+    'event_description', 
+    'event_date'
+  ])
+  return getById(updatedClass.event_id)
+}
+
+async function remove(id){
+  return db('events').del().where(id)
 }
