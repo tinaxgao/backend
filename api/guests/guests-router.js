@@ -9,4 +9,20 @@ router.get('/', async (req, res, next) => {
     .catch(next)
 })
 
+router.get('/:id', (req, res, next) => {
+  Guests.getById(req.params.id)
+    .then(guest => {
+      res.status(200).json(guest)
+    })
+    .catch(next)
+})
+
+router.post('/', async (req, res, next) => {
+  Guests.add(req.body)
+    .then(guest => {
+      res.status(201).json(guest)
+    })
+    .catch(next)
+})
+
 module.exports = router
