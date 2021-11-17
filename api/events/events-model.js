@@ -66,7 +66,7 @@ async function update(id, event){
     'event_description', 
     'event_date'
   ])
-  return getById(updatedClass.event_id)
+  return getById(updatedEvent.event_id)
 }
 
 async function remove(id){

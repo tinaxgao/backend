@@ -1,7 +1,6 @@
-
 const router = require('express').Router()
 const Events = require('./events-model')
-const { validateEvent, validateEventId } = require('./events-middleware');
+const { validateEvent } = require('./events-middleware');
 
 //GET ALL EVENTS
 router.get('/', async (req, res, next) => {
@@ -30,7 +29,7 @@ router.post('/', validateEvent, async (req, res, next) => {
         .catch(next)
 })
 //UPDATE AN EVENT
-router.put('/:id', validateEvent,  async(req, res, next) => {
+router.put('/:id',  async(req, res, next) => {
 	const { id } = req.params
 	const eventChanges = req.body
 	Events.update(id, eventChanges)
