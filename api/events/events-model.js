@@ -31,7 +31,7 @@ async function get() {
 
 async function getById(id) {
   const [event] = await db('events as e')
-    .join('users as u', 'e.event_id', 'u.user_id')
+    .join('users as u', 'e.organizer', 'u.user_id')
     .select(
       'e.event_id',
       'u.first_name as organizer',
