@@ -9,8 +9,8 @@ router.get('/', async (req, res, next) => {
 		})
 		.catch(next);
 });
+
 //GET EVENT AT 'ID'
-//NEEDS A VALIDATION MIDDLEWARE
 router.get('/:id', (req, res, next) => {
 	Events.getById(req.params.id)
 		.then((event) => {
@@ -18,12 +18,13 @@ router.get('/:id', (req, res, next) => {
 		})
 		.catch(next);
 });
+
 //POST AN EVENT
 //NEEDS A VALIDATION MIDDLEWARE
-router.post('/', (req, res, next) => {
+router.post('/', async (req, res, next) => {
     Events.insert(req.body)
         .then(event => {
-            res.status(201).json({message: `New event: ${event} created.`})
+            res.status(201).json(event)
         })
         .catch(next)
 })

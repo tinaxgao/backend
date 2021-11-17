@@ -7,15 +7,7 @@ module.exports = {
 }
 
 async function get() {
-  const allEvents = await db('events as e')
-    .join('users as u', 'e.event_id', 'u.user_id')
-    .select(
-      'e.event_id',
-      'u.first_name as organizer',
-      'e.event_location',
-      'e.event_description'
-    )
-    return allEvents
+  return await db('events')
 }
 
 async function getById(id) {
@@ -24,6 +16,7 @@ async function getById(id) {
     .select(
       'e.event_id',
       'u.first_name as organizer',
+      'e.event_title',
       'e.event_location',
       'e.event_description'
     )
@@ -31,11 +24,9 @@ async function getById(id) {
   return event
 }
 
-//Still need to test 'insert'
-function insert(event){
-  return db('events')
-      .insert(event)
-      .then(id => {
-          return getById(id[0]);
-      })
+async function insert(newEvent){
+  const event = await db('events')
+    .returning(['event_id', 'organizer', 'event_title', 'event_location', 'event_description'])
+    .insert(newEvent)
+  return event
 }
