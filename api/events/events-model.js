@@ -14,7 +14,8 @@ async function get() {
       'u.first_name as organizer',
       'e.event_title',
       'e.event_location',
-      'e.event_description'
+      'e.event_description',
+      'e.event_date'
     )
   const eventArray = allEvents.map((event) => {
     const eventFormat = {
@@ -22,7 +23,8 @@ async function get() {
       organizer: event.organizer,
       title: event.event_title,
       location: event.event_location,
-      description: event.event_description
+      description: event.event_description,
+      date: event.event_date
     }
     return eventFormat
   })
@@ -37,7 +39,8 @@ async function getById(id) {
       'u.first_name as organizer',
       'e.event_title',
       'e.event_location',
-      'e.event_description'
+      'e.event_description',
+      'e.event_date'
     )
     .where('event_id', id)
   return event
@@ -45,7 +48,7 @@ async function getById(id) {
 
 async function insert(newEvent){
   const event = await db('events')
-    .returning(['event_id', 'organizer', 'event_title', 'event_location', 'event_description'])
+    .returning(['event_id', 'organizer', 'event_title', 'event_location', 'event_description', 'event_date'])
     .insert(newEvent)
   return event
 }

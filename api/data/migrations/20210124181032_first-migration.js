@@ -21,7 +21,7 @@ exports.up = async (knex) => {
       event.string('event_title', 200).notNullable()
       event.string('event_location', 200).notNullable()
       event.string('event_description', 200)
-      event.date('event_date')
+      event.string('event_date', 200)
       event.timestamps(false, true)
     })
     .createTable('guests', (guest) => {
