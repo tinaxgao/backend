@@ -19,8 +19,55 @@ async function updateEvent(event_id, changes) {
   return event
 }
 
+async function getEventGuests(event_id) {
+  let event = await db('events as e')
+    .join(
+      'guests as g',
+      'e.event_id',
+      'g.event_id'
+    )
+    .join(
+      'users as u',
+      'e.organizer',
+      'u.user_id'
+    )
+    .where('e.event_id', event_id)
+
+    return {
+      event_id: event[0].event_id,
+      title: event[0].event_title,
+      details: {
+        organizer: event[0].first_name,
+        location: event[0].event_location,
+        description: event[0].event_description,
+        date: event[0].event_date
+      },
+      guests: event.map(guest => {
+        return ({
+          user_id: guest.user_id,
+          guest: guest.first_name
+        })
+      })
+    }
+}
+
+// async function addGuestToEvent(event_id, data) {
+//   const guest = await db('guests')
+//     .returning(['guest_id', 'user_id', 'event_id'])
+//     .insert({'guest_id', 'user_id', 'event_id'})
+//   return getEventGuests(event_id)
+// }
+
+// async function addGuestToEvent(newGuest) {
+//     const guest = await db('guests')
+//       .returning(['guest_id', 'user_id', 'event_id'])
+//       .insert(newGuest)
+//     return guest
+// }
+
 module.exports = {
   getEvents,
   createEvent,
-  updateEvent
+  updateEvent,
+  getEventGuests
 }

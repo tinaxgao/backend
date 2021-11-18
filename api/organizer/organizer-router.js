@@ -26,4 +26,20 @@ router.put('/event/:event_id', restricted, (req, res, next) => {
     .catch(next)
 })
 
+router.get('/:event_id/guests', restricted, (req, res, next) => {
+  Organizer.getEventGuests(req.params.event_id)
+    .then(guests => {
+      res.status(200).json(guests)
+    })
+    .catch(next)
+})
+
+// router.post('/:event_id/guests', restricted, (req, res, next) => {
+//   Organizer.addGuestToEvent(req.params.event_id, req.body)
+//     .then(guests => {
+//       res.status(201).json(guests)
+//     })
+//     .catch(next)
+// })
+
 module.exports = router
