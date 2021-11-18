@@ -1,17 +1,46 @@
 const db = require('../data/db-config');
 
 async function get() {
-  const allEvents = await db('events as e')
+  const rows = await db('events as e')
     .join('users as u', 'e.organizer', 'u.user_id')
+    .join('guests as g', 'e.event_id', 'g.event_id')
+    .join('users as us', 'g.user_id', 'us.user_id')
     .select(
       'e.event_id',
       'u.first_name as organizer',
       'e.event_title',
       'e.event_location',
       'e.event_description',
-      'e.event_date'
+      'e.event_date',
+      'g.event_id as event',
+      'us.first_name as guest'
     )
-  const eventArray = allEvents.map((event) => {
+    
+    // const result = {
+    //   event_id: Number.event_id,
+    //   organizer: rows[0].organizer,
+    //   title: rows[0].event_title,
+    //   location: rows[0].event_location,
+    //   description: rows[0].event_description,
+    //   date: rows[0].event_date,
+    //   guests: rows
+    //     .map((guest) => {
+    //       if(
+    //         guest.event !== guest.event_id
+    //       ) {
+    //         return []
+    //       } else {
+    //         return {
+    //           event: guest.event,
+    //           guest: guest.guest
+    //         }
+    //       }
+    //     })
+    //     .flat()
+    // }
+    // return result
+
+  const eventArray = rows.map((event) => {
     const eventFormat = {
       event_id: event.event_id,
       organizer: event.organizer,
