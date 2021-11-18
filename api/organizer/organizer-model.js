@@ -51,6 +51,20 @@ async function getEventGuests(event_id) {
     }
 }
 
+// async function addGuestToEvent(event_id, data) {
+//   const guest = await db('guests')
+//     .returning(['guest_id', 'user_id', 'event_id'])
+//     .insert({'guest_id', 'user_id', 'event_id'})
+//   return getEventGuests(event_id)
+// }
+
+// async function addGuestToEvent(newGuest) {
+//     const guest = await db('guests')
+//       .returning(['guest_id', 'user_id', 'event_id'])
+//       .insert(newGuest)
+//     return guest
+// }
+
 module.exports = {
   getEvents,
   createEvent,
