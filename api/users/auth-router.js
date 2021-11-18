@@ -31,12 +31,13 @@ router.post('/register', checkBody, checkEmailFree, async (req, res, next) => {
 })
 
 router.post('/login', checkBody, checkExistingEmail, (req, res, next) => {
-  const {password} = req.body
-
-  if(bcrypt.compareSync(password, req.user.password)) {
+  let {user_id, email, password} = req.dbUser
+  if(bcrypt.compareSync(req.user.password, password)) {
     const token = generateToken(req.user)
     res.status(200).json({
       message: `welcome, ${req.user.email}`,
+      email,
+      user_id,
       token
     })
   } else {
