@@ -1,5 +1,4 @@
 const db = require('../data/db-config');
-const {restricted} = require('../restricted-middleware')
 
 async function get() {
   const allEvents = await db('events as e')
@@ -41,35 +40,38 @@ async function getById(id) {
   return event
 }
 
-async function insert(newEvent){
-  const event = await db('events')
-    .returning(['event_id', 'organizer', 'event_title', 'event_location', 'event_description', 'event_date'])
-    .insert(newEvent)
-  return event
-}
+// moving content below to a different page where only an organizer has access to create/update/delete an event
+// will keep text here just incase for now
 
-async function update(id, event){
-  const [updatedEvent] = await db('events')
-  .where({ id })
-  .update(event, [
-    'event_id', 
-    'organizer', 
-    'event_title', 
-    'event_location', 
-    'event_description', 
-    'event_date'
-  ])
-  return getById(updatedEvent.event_id)
-}
+// async function insert(newEvent){
+//   const event = await db('events')
+//     .returning(['event_id', 'organizer', 'event_title', 'event_location', 'event_description', 'event_date'])
+//     .insert(newEvent)
+//   return event
+// }
 
-async function remove(id){
-  return db('events').del().where(id)
-}
+// async function update(id, event){
+//   const [updatedEvent] = await db('events')
+//   .where({ id })
+//   .update(event, [
+//     'event_id', 
+//     'organizer', 
+//     'event_title', 
+//     'event_location', 
+//     'event_description', 
+//     'event_date'
+//   ])
+//   return getById(updatedEvent.event_id)
+// }
+
+// async function remove(id){
+//   return db('events').del().where(id)
+// }
 
 module.exports = {
   get,
   getById,
-  insert,
-  update,
-  remove
+  // insert,
+  // update,
+  // remove
 }
