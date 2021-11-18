@@ -5,8 +5,11 @@ async function getEvents(organizer) {
   return result
 }
 
-function createEvent() {
-
+async function createEvent(newEvent) {
+  const event = await db('events')
+    .returning(['event_id', 'organizer', 'event_title', 'event_location', 'event_description', 'event_date'])
+    .insert(newEvent);
+    return event;
 }
 
 function createGuest() {

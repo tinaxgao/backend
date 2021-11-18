@@ -10,4 +10,12 @@ router.get('/:user_id', restricted, (req, res, next) => {
     .catch(next)
 })
 
+router.post('/event', restricted, (req, res, next) => {
+  Organizer.createEvent(req.body)
+    .then(newEvent => {
+      res.status(201).json(newEvent)
+    })
+    .catch(next) 
+})
+
 module.exports = router
