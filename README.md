@@ -42,7 +42,7 @@ ENDPOINTS
   `event_description`,
   `event_date`
 
-[POST] - https://lambdapotluck.herokuapp.com/api/organizer/event/:event_id 
+[PUT] - https://lambdapotluck.herokuapp.com/api/organizer/event/:event_id 
 
 :updates an event with an event_id
 
