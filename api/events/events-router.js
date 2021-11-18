@@ -22,6 +22,7 @@ router.get('/:id', restricted, (req, res, next) => {
 });
 
 // moving content below to a different page where only an organizer has access to create/update/delete an event
+// will keep text here just incase for now
 
 // //POST AN EVENT
 // router.post('/', validateEvent, restricted, async (req, res, next) => {
