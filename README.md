@@ -48,7 +48,9 @@ ENDPOINTS
 :updates an event with an event_id
 
   `required fields:`
+  `event_id`
   `event_title`,
+  `organizer (generated with the user_id)`,
   `event_location`,
   `event_description`,
   `event_date`
