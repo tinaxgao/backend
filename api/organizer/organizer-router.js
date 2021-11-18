@@ -18,4 +18,12 @@ router.post('/event', restricted, (req, res, next) => {
     .catch(next) 
 })
 
+router.put('/:event_id', restricted, (req, res, next) => {
+  Organizer.updateEvent(req.params.event_id, req.body)
+    .then(updatedevent => {
+      res.status(200).json(updatedevent)
+    })
+    .catch(next)
+})
+
 module.exports = router
