@@ -43,7 +43,6 @@ exports.up = async (knex) => {
         .inTable('events')
         .onDelete('RESTRICT')
         .onUpdate('RESTRICT')
-      guest.string('dish', 200).notNullable()
       guest.timestamps(false, true)
     })
     .createTable('event_dishes', (event_dishes) => {
