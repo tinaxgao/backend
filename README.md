@@ -38,6 +38,7 @@ ENDPOINTS
 
   `required fields:`
   `event_title`,
+  `organizer (which is the user_id)`,
   `event_location`,
   `event_description`,
   `event_date`
