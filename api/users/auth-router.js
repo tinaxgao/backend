@@ -5,11 +5,12 @@ const {JWT_SECRET} = require('../secrets')
 const Users = require('./auth-model')
 const {
   checkBody,
-  checkUsernameFree,
-  checkExistingUsername
+  checkEmailFree,
+  checkExistingEmail
 } = require('./auth-middleware')
+const {restricted} = require('../restricted-middleware')
 
-router.get('/', (req, res, next) => {
+router.get('/', restricted, (req, res, next) => {
   Users.find()
     .then((users) => {
       res.status(200).json(users)
@@ -17,7 +18,7 @@ router.get('/', (req, res, next) => {
     .catch(next)
 })
 
-router.post('/register', checkBody, checkUsernameFree, async (req, res, next) => {
+router.post('/register', checkBody, checkEmailFree, async (req, res, next) => {
   let user = req.body
   const hash = bcrypt.hashSync(user.password, 6)
   user.password = hash
@@ -29,13 +30,13 @@ router.post('/register', checkBody, checkUsernameFree, async (req, res, next) =>
     .catch(next)
 })
 
-router.post('/login', checkBody, checkExistingUsername, (req, res, next) => {
+router.post('/login', checkBody, checkExistingEmail, (req, res, next) => {
   const {password} = req.body
 
   if(bcrypt.compareSync(password, req.user.password)) {
     const token = generateToken(req.user)
     res.status(200).json({
-      message: `welcome, ${req.user.username}`,
+      message: `welcome, ${req.user.email}`,
       token
     })
   } else {
@@ -49,7 +50,7 @@ router.post('/login', checkBody, checkExistingUsername, (req, res, next) => {
 function generateToken(user) {
   const payload = {
     subject: user.user_id,
-    username: user.username
+    email: user.email
   }
   const options = {
     expiresIn: "1d"

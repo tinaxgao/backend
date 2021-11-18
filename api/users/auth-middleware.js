@@ -1,31 +1,31 @@
 const Users = require('./auth-model')
 
 const checkBody = (req, res, next) => {
-  const {username, password} = req.body
+  const {email, password} = req.body
 
   if(
-    !username ||
-    username.trim() === '' ||
-    typeof username !== 'string' ||
+    !email ||
+    email.trim() === '' ||
+    typeof email !== 'string' ||
     !password
   ) {
     return next({
       status: 400,
-      message: 'username and password required'
+      message: 'email and password required'
     })
   }
   next()
 }
 
-const checkUsernameFree = async (req, res, next) => {
+const checkEmailFree = async (req, res, next) => {
   try {
-    const {username} = req.body
-    const existingUsername = await Users.findBy({username}).first()
+    const {email} = req.body
+    const existingEmail = await Users.findBy({email}).first()
 
-    if(existingUsername) {
+    if(existingEmail) {
       next({
         status: 422,
-        message: 'username taken'
+        message: 'email taken'
       })
     } else {
       next()
@@ -35,18 +35,18 @@ const checkUsernameFree = async (req, res, next) => {
   }
 }
 
-const checkExistingUsername = async (req, res, next) => {
+const checkExistingEmail = async (req, res, next) => {
   try {
-    const {username} = req.body
-    const existingUsername = await Users.findBy({username}).first()
+    const {email} = req.body
+    const existingEmail = await Users.findBy({email}).first()
 
-    if(!existingUsername) {
+    if(!existingEmail) {
       next({
         status: 401,
         message: 'invalid credentials'
       })
     } else {
-      req.user = existingUsername
+      req.user = existingEmail
       next()
     }
   } catch (error) {
@@ -56,6 +56,6 @@ const checkExistingUsername = async (req, res, next) => {
 
 module.exports = {
   checkBody,
-  checkUsernameFree,
-  checkExistingUsername
+  checkEmailFree,
+  checkExistingEmail
 }
