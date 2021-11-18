@@ -8,8 +8,9 @@ const {
   checkUsernameFree,
   checkExistingUsername
 } = require('./auth-middleware')
+const {restricted} = require('../restricted-middleware')
 
-router.get('/', (req, res, next) => {
+router.get('/', restricted, (req, res, next) => {
   Users.find()
     .then((users) => {
       res.status(200).json(users)

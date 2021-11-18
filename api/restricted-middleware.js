@@ -1,7 +1,7 @@
 const {JWT_SECRET} = require('./secrets')
 const jwt = require('jsonwebtoken')
 
-module.exports = (req, res, next) => {
+const restricted = (req, res, next) => {
   const token = req.headers.authorization
   if(!token) return next({
     status: 401,
@@ -20,4 +20,8 @@ module.exports = (req, res, next) => {
       next()
     }
   )
+}
+
+module.exports = {
+  restricted
 }
