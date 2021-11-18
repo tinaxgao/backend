@@ -1,12 +1,5 @@
 const db = require('../data/db-config');
-
-module.exports = {
-    get,
-    getById,
-    insert,
-    update,
-    remove
-}
+const {restricted} = require('../restricted-middleware')
 
 async function get() {
   const allEvents = await db('events as e')
@@ -71,4 +64,12 @@ async function update(id, event){
 
 async function remove(id){
   return db('events').del().where(id)
+}
+
+module.exports = {
+  get,
+  getById,
+  insert,
+  update,
+  remove
 }

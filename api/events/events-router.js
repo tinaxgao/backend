@@ -1,9 +1,10 @@
 const router = require('express').Router()
 const Events = require('./events-model')
 const { validateEvent } = require('./events-middleware');
+const {restricted} = require('../restricted-middleware')
 
 //GET ALL EVENTS
-router.get('/', async (req, res, next) => {
+router.get('/', restricted, async (req, res, next) => {
 	Events.get()
 		.then((eventsArray) => {
 			res.status(200).json(eventsArray)
@@ -12,7 +13,7 @@ router.get('/', async (req, res, next) => {
 });
 
 //GET EVENT AT 'ID'
-router.get('/:id', (req, res, next) => {
+router.get('/:id', restricted, (req, res, next) => {
 	Events.getById(req.params.id)
 		.then((event) => {
 			res.status(200).json(event);
@@ -21,7 +22,7 @@ router.get('/:id', (req, res, next) => {
 });
 
 //POST AN EVENT
-router.post('/', validateEvent, async (req, res, next) => {
+router.post('/', validateEvent, restricted, async (req, res, next) => {
     Events.insert(req.body)
         .then(event => {
             res.status(201).json(event)
@@ -29,7 +30,7 @@ router.post('/', validateEvent, async (req, res, next) => {
         .catch(next)
 })
 //UPDATE AN EVENT
-router.put('/:id',  async(req, res, next) => {
+router.put('/:id', restricted, async(req, res, next) => {
 	const { id } = req.params
 	const eventChanges = req.body
 	Events.update(id, eventChanges)
@@ -39,7 +40,7 @@ router.put('/:id',  async(req, res, next) => {
 		.catch(next)
 })
 //DELETE AN EVENT
-router.delete('/:id', async(req, res, next) => {
+router.delete('/:id', restricted, async(req, res, next) => {
 	const { id } = req.params
 	Events.remove(id)
 		.then(removed => {

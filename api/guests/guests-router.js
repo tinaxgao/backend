@@ -1,5 +1,6 @@
 const router = require('express').Router()
 const Guests = require('./guests-model')
+const {restricted} = require('../restricted-middleware')
 
 router.get('/', async (req, res, next) => {
   Guests.get()

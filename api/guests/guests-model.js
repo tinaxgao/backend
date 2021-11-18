@@ -7,15 +7,13 @@ async function get() {
     .select(
       'guest_id',
       'u.first_name as name',
-      'e.event_title as title',
-      'dish'
+      'e.event_title as title'
       )
   const guestArray = allGuests.map((guest) => {
     const guestFormat = {
       guest_id: guest.guest_id,
       name: guest.name,
-      event: guest.title,
-      dish: guest.dish
+      event: guest.title
     }
     return guestFormat
   })
