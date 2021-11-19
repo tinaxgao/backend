@@ -48,6 +48,23 @@ router.post('/login', checkBody, checkExistingEmail, (req, res, next) => {
   }
 })
 
+router.get('/logout', (req, res, next) => {
+  const token = logoutToken(req.user)
+  res.status(200).json({
+    message: 'see ya later',
+    token
+  })
+})
+
+function logoutToken(user) {
+  const payload = {}
+  const options = {
+    expiresIn: "1"
+  }
+  return jwt.sign(payload, JWT_SECRET, options)
+}
+
+
 function generateToken(user) {
   const payload = {
     subject: user.user_id,
