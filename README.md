@@ -2,7 +2,7 @@ ENDPOINTS
 
 ## Login/Registration Enpoints
 
-[POST] - https://lambdapotluck.herokuapp.com/api/auth/register  
+[POST] - https://potluck3backend.herokuapp.com//api/auth/register  
 
 :registers new user
 
@@ -12,7 +12,7 @@ ENDPOINTS
   `email`,
   `password`
 
-[POST] - https://lambdapotluck.herokuapp.com/api/auth/login  
+[POST] - https://potluck3backend.herokuapp.com//api/auth/login  
 
 :logs new user in & generates a token
 
@@ -22,17 +22,17 @@ ENDPOINTS
 
 ### ENDPOINTS BELOW THIS LINE REQUIRE USERS TO HAVE A TOKEN FOR IT TO WORK
 
-[GET] - https://lambdapotluck.herokuapp.com/api/auth  
+[GET] - https://potluck3backend.herokuapp.com//api/auth  
 
 :gets all  users in database
 
 ## Organizer Endpoints 
 
-[GET] - https://lambdapotluck.herokuapp.com/api/organizer/:user_id  
+[GET] - https://potluck3backend.herokuapp.com//api/organizer/:user_id  
 
 :gets all events belonging created by a user
 
-[POST] - https://lambdapotluck.herokuapp.com/api/organizer/event 
+[POST] - https://potluck3backend.herokuapp.com//api/organizer/event 
 
 :creates a new event
 
@@ -43,7 +43,7 @@ ENDPOINTS
   `event_description`,
   `event_date`
 
-[PUT] - https://lambdapotluck.herokuapp.com/api/organizer/event/:event_id 
+[PUT] - https://potluck3backend.herokuapp.com//api/organizer/event/:event_id 
 
 :updates an event with an event_id
 
