@@ -16,7 +16,11 @@ server.use('/api/events', eventRouter)
 server.use('/api/guests', guestRouter)
 server.use('/api/organizer', organizerRouter)
 
-server.use((err, req, res, next) => {
+server.get('/', (req, res) => {
+  res.json("server up")
+})
+
+server.use((err, req, res, next) => { // eslint-disable-line
   res.status(err.status || 500).json({
     message: err.message,
     stack: err.stack
