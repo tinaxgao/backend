@@ -4,7 +4,7 @@ const Events = require('./events-model')
 const {restricted} = require('../restricted-middleware')
 
 //GET ALL EVENTS
-router.get('/', restricted, async (req, res, next) => {
+router.get('/', restricted, (req, res, next) => {
 	Events.get()
 		.then((eventsArray) => {
 			res.status(200).json(eventsArray)
@@ -47,7 +47,7 @@ router.get('/:id', restricted, (req, res, next) => {
 // 	const { id } = req.params
 // 	Events.remove(id)
 // 		.then(removed => {
-// 			res.status(204).json({message: `Event has beed REMOVED`})
+// 			res.status(204).json({message: `Event has been REMOVED`})
 // 		})
 // 		.catch(next)
 // })
