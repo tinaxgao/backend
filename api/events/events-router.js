@@ -4,7 +4,7 @@ const Events = require('./events-model')
 const {restricted} = require('../restricted-middleware')
 
 //GET ALL EVENTS
-router.get('/', restricted, (req, res, next) => {
+router.get('/', restricted, async (req, res, next) => {
 	Events.get()
 		.then((eventsArray) => {
 			res.status(200).json(eventsArray)
