@@ -49,7 +49,7 @@ async function updateEvent(event_id, changes) {
 
 async function getEventGuests(event_id) {
   let event = await db("events as e")
-    .join("guests as g", "e.event_id", "g.event_id")
+    .leftJoin("guests as g", "e.event_id", "g.event_id")
     .join("users as u", "e.organizer", "u.user_id")
     .where("e.event_id", event_id);
 
