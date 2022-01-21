@@ -1,4 +1,4 @@
-ENDPOINTS
+# Potluck Planner - backend
 
 ## Login/Registration Enpoints
 
